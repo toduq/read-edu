@@ -1,0 +1,21 @@
+doctype html
+
+meta(charset='utf-8')
+meta(http-equiv='X-UA-Compatible', content='IE=edge')
+meta(name='viewport', content='width=device-width, initial-scale=1')
+
+title Yomiganize
+
+script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js")
+script(src="/js/main.js")
+link(rel="stylesheet", href="/css/main.css")
+
+.head
+	.title
+		h1 Yomiganize
+		span Read Japanese text easily! (日本語の文章にルビを振ります)
+
+.container(ng-app="app")
+	.container-in(ng-controller="ctrl")
+		textarea.md-input(ng-model="content", ng-change="parse()", placeholder="Text here to convert into 'Hiragana'!")
+		.md-design(ng-bind-html="parsed")

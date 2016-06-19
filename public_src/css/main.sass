@@ -1,0 +1,53 @@
+@import "reset"
+
+// values
+$background-color: #FCFCFC
+$font-color: #333
+$link-color: #08F
+$border-color: rgba(0, 0, 0, 0.2)
+
+@mixin base_css
+	background-color: $background-color
+	font-size: 16px
+	line-height: 1.5
+	color: $font-color
+	font-family: 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', Meiryo, メイリオ, Osaka, 'MS PGothic', arial, helvetica, sans-serif
+	-webkit-text-size-adjust: 100%
+	box-sizing: border-box
+
+*
+	box-sizing: inherit
+html
+	@include base_css
+
+.head
+	width: 100%
+	background: #eee
+	padding: 10px
+	.title
+		h1
+			display: inline-block
+			margin-right: 20px
+			line-height: 2
+		span
+			font-size: 12px
+
+
+.container
+	width: 100%
+	padding: 10px
+	.container-in
+		border: 1px solid #777
+		@include cf
+	.md-input, .md-design
+		float: left
+		width: 50%
+		height: 1000px
+		border: none
+		padding: 10px
+		word-wrap: break-word
+		overflow-y: scroll
+	.md-input
+		border-right: 1px solid #777
+	.md-design
+		line-height: 2
