@@ -1,4 +1,4 @@
-var Mecab, PORT, app, body_parser, express, fs, hiraganize, https, mecab, options;
+var Mecab, PORT, app, body_parser, express, fs, helmet, hiraganize, https, mecab, options;
 
 PORT = process.env['NODE_PORT'] || 3000;
 
@@ -15,6 +15,8 @@ express = require('express');
 
 body_parser = require('body-parser');
 
+helmet = require('helmet');
+
 app = express();
 
 app.use(body_parser.json());
@@ -22,6 +24,8 @@ app.use(body_parser.json());
 app.use(body_parser.urlencoded({
   extended: true
 }));
+
+app.use(helmet());
 
 app.use(express["static"](__dirname + '/public'));
 
@@ -57,7 +61,8 @@ if (process.env['NODE_CERTDIR']) {
   fs = require('fs');
   options = {
     key: fs.readFileSync(process.env['NODE_CERTDIR'] + 'privkey.pem'),
-    cert: fs.readFileSync(process.env['NODE_CERTDIR'] + 'cert.pem')
+    cert: fs.readFileSync(process.env['NODE_CERTDIR'] + 'fullchain.pem'),
+    ca: fs.readFileSync(process.env['NODE_CERTDIR'] + 'chain.pem')
   };
   https = require('https');
   https.createServer(options, app).listen(443);

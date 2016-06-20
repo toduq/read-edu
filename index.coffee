@@ -10,9 +10,11 @@ mecab = new Mecab()
 # express
 express = require 'express'
 body_parser = require 'body-parser'
+helmet = require 'helmet'
 app = express()
 app.use body_parser.json()
 app.use body_parser.urlencoded({extended: true})
+app.use helmet()
 app.use express.static(__dirname + '/public')
 
 app.post '/convert', (req, res) ->
@@ -38,7 +40,8 @@ if process.env['NODE_CERTDIR']
 	fs = require 'fs'
 	options = {
 		key:  fs.readFileSync process.env['NODE_CERTDIR'] + 'privkey.pem'
-		cert: fs.readFileSync process.env['NODE_CERTDIR'] + 'cert.pem'
+		cert: fs.readFileSync process.env['NODE_CERTDIR'] + 'fullchain.pem'
+		ca:   fs.readFileSync process.env['NODE_CERTDIR'] + 'chain.pem'
 	};
 	https = require 'https'
 	https.createServer(options, app).listen 443
